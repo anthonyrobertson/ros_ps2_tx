@@ -1,0 +1,12 @@
+services:
+  
+  ros_demo_app:
+    container_name: ros_demo_app
+    build:
+      context: .
+      dockerfile: Dockerfile # containing a few dependencies for demo
+    volumes:
+      - ./ros_ws:/root/ros_ws 
+    ports:
+      - "9090:9090"  # WebSocket port for rosbridge_suite.
+    network_mode: host
