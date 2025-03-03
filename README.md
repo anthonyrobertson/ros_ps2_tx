@@ -3,6 +3,8 @@
 Wire a PS2 controller directly to an ESP8266-like device and messages will be passed to a ROS2 project
 via rosbridge_websocket. Messages are published on the `/joy` topic, of the type `sensor_msgs/msg/Joy`.
 
+More background here: https://www.anthonywritescode.com/ps2-controller-for-ros2-projects/
+
 ### Hardware Setup
 
 Wiring connections
@@ -10,10 +12,10 @@ Wiring connections
 |---------------------|------------|-------------|
 | VCC                | 3.3V        | -           |
 | GND                | GND         | -           |
-| Brown (D6)        | D6         | GPIO12      |
-| Orange (D7)       | D7         | GPIO13      |
-| Yellow (D3)       | D3         | GPIO0       |
-| Blue (D5)         | D5         | GPIO14      |
+| Brown (D1 / DATA)        | D6         | GPIO12      |
+| Orange (D0 / CMD)       | D7         | GPIO13      |
+| Yellow (CS / ATT/Attention)       | D3         | GPIO0       |
+| Blue (CLK/Clock)         | D5         | GPIO14      |
 | Green & Gray      | Not Connected | -       |
 
 ### Configuration:
