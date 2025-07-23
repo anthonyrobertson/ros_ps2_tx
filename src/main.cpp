@@ -4,6 +4,7 @@
 #include <ArduinoJson.h>
 #include <ArduinoWebsockets.h>
 #include "PS2X_lib.h"
+#include <ctime>
 
 using namespace websockets;
 
@@ -176,7 +177,6 @@ void loop() {
     z2 = ps2x.Button(PSB_R3);
   }
 
-  // some serial debugging output
   Serial.print(x1, DEC);
   Serial.print(",");
   Serial.print(y1, DEC);
@@ -203,8 +203,9 @@ void loop() {
   JsonObject header = msg.createNestedObject("header");
   header["frame_id"] = "controller";
   JsonObject stamp = header.createNestedObject("stamp");
-  stamp["sec"] = 0;
-  stamp["nanosec"] = 0;
+  std::time_t now = std::time(nullptr);
+  stamp["sec"] = static_cast<int>(now);
+  stamp["nanosec"] = (micros() % 1000000) * 1000;
   
   // Axes array (e.g., joystick positions)
   JsonArray axes = msg.createNestedArray("axes");
